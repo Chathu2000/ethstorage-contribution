@@ -1,0 +1,30 @@
+name: EthStorage Contribution
+
+on:
+  workflow_dispatch:   # lets you run it manually
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt update && sudo apt upgrade -y
+          sudo apt install -y curl git build-essential screen
+          curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+          sudo apt install -y nodejs
+          sudo npm install -g npm@9.2
+          sudo npm install -g @p0tion/phase2cli
+
+      - name: Authenticate with GitHub
+        run: |
+          phase2cli auth
+          echo "⚠️ Copy the code above, open https://github.com/login/device in your browser, and finish auth"
+
+      - name: Start contribution
+        run: |
+          screen -dmS ethstorage phase2cli contribute -c ethstorage-v1-trusted-setup-ceremony
+          echo "✅ Contribution started inside screen session"
