@@ -24,7 +24,7 @@ jobs:
           phase2cli auth
           echo "⚠️ Copy the code above, open https://github.com/login/device in your browser, and finish auth"
 
-      - name: Start contribution
+     - name: Start contribution in foreground
         run: |
-          screen -dmS ethstorage phase2cli contribute -c ethstorage-v1-trusted-setup-ceremony
-          echo "✅ Contribution started inside screen session"
+    echo "Starting EthStorage contribution in foreground..."
+    phase2cli contribute -c ethstorage-v1-trusted-setup-ceremony
